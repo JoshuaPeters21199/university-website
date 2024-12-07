@@ -14,8 +14,8 @@ export async function middleware(req) {
 
     // Define accessible paths based on role and school
     const accessMap = {
-        'Admin': { 'uvu': '/uvu/admin', 'uofu': '/uofu/admin' },
-        'Teacher': { 'uvu': '/uvu/teacher', 'uofu': '/uofu/teacher' }
+        'admin': { 'uvu': '/uvu/admin', 'uofu': '/uofu/admin' },
+        'teacher': { 'uvu': '/uvu/teacher', 'uofu': '/uofu/teacher' }
     };
 
     // Get the allowed path for the user's role and school
