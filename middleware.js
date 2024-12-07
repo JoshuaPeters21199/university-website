@@ -39,28 +39,3 @@ export const config = {
         '/uofu/student/:path*',
     ]
 }
-
-// Restrict routes by school and role
-// if (url.startsWith('/uvu/admin') && (role !== 'Admin' || school !== 'uvu')) {
-//     return NextResponse.redirect(new URL('/', req.url));
-// }
-
-// if (url.startsWith('/uvu/teacher') && (role !== 'Teacher' || school !== 'Utah Valley University')) {
-//     return NextResponse.redirect(new URL('/unauthorized', req.url));
-// }
-
-// if (url.startsWith('/uvu/student') && (role !== 'Student' || school !== 'Utah Valley University')) {
-//     return NextResponse.redirect(new URL("/unauthorized", req.url));
-// }
-
-// if (url.startsWith('/uofu/admin') && (role !== 'Admin' || school !== 'University of Utah')) {
-//     return NextResponse.redirect(new URL('/unauthorized', req.url));
-// }
-
-// if (url.startsWith('/uofu/teacher') && (role !== 'Teacher' || school !== 'uofu')) {
-//     return NextResponse.redirect(new URL('/unauthorized', req.url));
-// }
-
-// if (url.startsWith('/uofu/student') && (role !== 'Student' || school !== 'University of Utah')) {
-//     return NextResponse.redirect(new URL('/unauthorized', req.url));
-// }
