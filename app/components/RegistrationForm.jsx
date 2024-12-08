@@ -13,7 +13,7 @@ export default function RegistrationForm() {
     const [school, setSchool] = useState(session?.user?.school || '');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const [role, setRole] = useState('');
+    const [role, setRole] = useState('student');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -39,12 +39,68 @@ export default function RegistrationForm() {
         setRole(event.target.value);
     }
 
+    // Handle form submition
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        if (!school || !firstName || !lastName || !role || !username || !password) {
+            setError("All fields are required.");
+            return;
+        }
+
+        try {
+            console.log(school);
+            console.log(firstName);
+            console.log(lastName);
+            console.log(role);
+            console.log(username);
+            console.log(password);
+            // Check to see if the user already exists
+            const responseUserExists = await fetch('/api/userExists', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username
+                })
+            });
+
+            const { user } = await responseUserExists.json(); // Destructure the user 
+
+            if (user) {
+                setError('User already exists.');
+                return;
+            }
+
+            const response = await fetch('/api/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    school, firstName, lastName, role, username, password
+                })
+            });
+
+            if (response.ok) {
+                const form = event.target;
+                form.reset();
+                router.push('/');
+            } else {
+                console.log('User registration failed.')
+            }
+        } catch (error) {
+            console.log('Error during registration: ', error);
+        }
+    };
+
     return (
         <div>
             <div>
                 <h1>Register User</h1>
 
-                <form className="flex flex-col gap-3">
+                <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
                     {creatorRole === 'student' && (
                         <div className="flex flex-col">
                             <label htmlFor="school-dropdown">Choose a school:</label>
