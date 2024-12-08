@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Navbar from "@/app/components/Navbar";
@@ -13,6 +14,9 @@ export default async function UVUTeacherPage() {
         <div>
             <div>Welcome to the UVU Teacher Dashboard</div>
             <Navbar />
+            <div>
+                <Link href={'/uvu/teacher/createTa'}>Create TA</Link>
+            </div>
         </div>
     )
 }

@@ -1,11 +1,11 @@
 import RegistrationForm from "@/app/components/RegistrationForm";
 import Link from "next/link";
 
-export default function UVUAdminCreateUser() {
+export default function UofUAdminCreateUser() {
     return (
         <div>
-            <div>UVU Admin create user page</div>
-            <Link href={'/uvu/admin'}>Go Back</Link>
+            <div>UofU Admin create user page</div>
+            <Link href={'/uofu/admin'}>Go Back</Link>
             <RegistrationForm />
         </div>
     )

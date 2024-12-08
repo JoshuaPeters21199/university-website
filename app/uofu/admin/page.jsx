@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Navbar from "@/app/components/Navbar";
@@ -13,6 +14,7 @@ export default async function UofUAdminPage() {
         <div>
             <div>Welcome to the U of U Admin Dashboard</div>
             <Navbar />
+            <Link href={'/uofu/admin/createUser'}>Create User</Link>
         </div>
     )
 }
