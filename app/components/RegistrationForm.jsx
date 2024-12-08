@@ -8,12 +8,12 @@ import { useState, useEffect } from "react";
 export default function RegistrationForm() {
     const { data: session } = useSession();
     const router = useRouter();
-    const creatorRole = session?.user?.role || 'student';
+    const creatorRole = session?.user?.role || '';
 
     const [school, setSchool] = useState(session?.user?.school || '');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const [role, setRole] = useState('student');
+    const [role, setRole] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -130,7 +130,7 @@ export default function RegistrationForm() {
                         onChange={event => setLastName(event.target.value)}
                     />
 
-                    {creatorRole !== 'student' || creatorRole !== 'teacher' && (
+                    {creatorRole === 'admin' && (
                         <div className="flex flex-col">
                             <label htmlFor="role-dropdown">Choose a role:</label>
                             <select
