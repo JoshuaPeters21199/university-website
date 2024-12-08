@@ -9,6 +9,8 @@ export default async function Register() {
     if (session) redirect('/');
     
     return (
-        <RegistrationForm />
+        <div className="h-screen flex flex-col items-center justify-center bg-slate-100">
+            <RegistrationForm />
+        </div>
     )
 }

@@ -14,6 +14,8 @@ export async function POST(req) {
             courses = await Course.find({ school: 'uvu' });
         } else if (role === 'teacher') {
             courses = await Course.find({ school: 'uvu', teacher: teacherUsername });
+        } else if (role === 'ta') {
+            courses = await Course.find({ school: 'uvu', ta: teacherUsername });
         } else {
             return NextResponse.json({ success: false, error: 'Unauthorized role' }, { status: 403 });
         }

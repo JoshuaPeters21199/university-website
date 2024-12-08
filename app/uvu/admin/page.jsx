@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import Navbar from "@/app/components/Navbar";
+import Courses from "@/app/components/Courses";
+import UVUAdminNavbar from "@/app/components/navbars/UVUAdminNavbar";
 
 export default async function UVUAdminPage() {
     const session = await getServerSession(authOptions);
@@ -11,12 +12,11 @@ export default async function UVUAdminPage() {
     }
 
     return (
-        <div>
-            <div>Welcome to the UVU Admin Dashboard</div>
-            <Navbar />
-            <div className="flex gap-3">
-                <Link href={'/uvu/admin/createUser'}>Create User</Link>
-                <Link href={'/uvu/admin/courses'}>Courses</Link>
+        <div className="h-screen flex flex-col">
+            <UVUAdminNavbar />
+
+            <div className="bg-slate-200 flex-grow py-10">
+                <Courses />
             </div>
         </div>
     )

@@ -9,6 +9,7 @@ export default function RegistrationForm() {
     const { data: session } = useSession();
     const router = useRouter();
     const creatorRole = session?.user?.role || '';
+    const creatorSchool = session?.user?.school || '';
 
     const [school, setSchool] = useState(session?.user?.school || '');
     const [firstName, setFirstName] = useState('');
@@ -18,6 +19,8 @@ export default function RegistrationForm() {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const schools = ['uvu', 'uofu']
+    const [title, setTitle] = useState('');
+    const [schoolNameDisplay, setSchoolNameDisplay] = useState('');
 
     const [roles, setRoles] = useState([]);
     const courses = [];
@@ -25,12 +28,24 @@ export default function RegistrationForm() {
     useEffect(() => {
         if (creatorRole === 'admin') {
             setRoles(['teacher', 'ta', 'student']);
+            setTitle(`Create ${schoolNameDisplay} User`);
         } else if (creatorRole === 'teacher') {
             setRole('ta');
+            setTitle(`Create ${schoolNameDisplay} TA`);
         } else {
             setRole('student');
+            setTitle('Register As a Student')
         }
     }, [creatorRole]);
+
+    // Set the school display name
+    useEffect(() => {
+        if (creatorSchool === 'uvu') {
+            setSchoolNameDisplay('Utah Valley University');
+        } else {
+            setSchoolNameDisplay('University of Utah');
+        }
+    }, [creatorSchool])
 
     const handleSchoolChange = (event) => {
         setSchool(event.target.value);
@@ -91,12 +106,12 @@ export default function RegistrationForm() {
     };
 
     return (
-        <div>
+        <div className="shadow rounded-lg w-[400px] h-auto flex flex-col justify-between p-5 bg-white">
             <div>
-                <h1>Register User</h1>
+                <h1 className="font-bold">{title}</h1>
 
-                <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
-                    {creatorRole === 'student' && (
+                <form className="flex flex-col gap-3 mt-3" onSubmit={handleSubmit}>
+                    {creatorRole === '' && (
                         <div className="flex flex-col">
                             <label htmlFor="school-dropdown">Choose a school:</label>
                             <select
@@ -172,7 +187,7 @@ export default function RegistrationForm() {
                         </div>
                     )}
 
-                    {creatorRole === 'student' && (
+                    {creatorRole === '' && (
                         <Link className="text-sm mt-3 text-right" href={'/'}>
                             Already have an account? <span className="underline">Sign In</span>
                         </Link>
