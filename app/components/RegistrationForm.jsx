@@ -20,6 +20,7 @@ export default function RegistrationForm() {
     const schools = ['uvu', 'uofu']
 
     const [roles, setRoles] = useState([]);
+    const courses = [];
 
     useEffect(() => {
         if (creatorRole === 'admin') {
@@ -43,18 +44,12 @@ export default function RegistrationForm() {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        if (!school || !firstName || !lastName || !role || !username || !password) {
+        if (!school || !firstName || !lastName || !role || !username || !password || !courses) {
             setError("All fields are required.");
             return;
         }
 
         try {
-            console.log(school);
-            console.log(firstName);
-            console.log(lastName);
-            console.log(role);
-            console.log(username);
-            console.log(password);
             // Check to see if the user already exists
             const responseUserExists = await fetch('/api/userExists', {
                 method: 'POST',
@@ -79,7 +74,7 @@ export default function RegistrationForm() {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    school, firstName, lastName, role, username, password
+                    school, firstName, lastName, role, username, password, courses
                 })
             });
 
