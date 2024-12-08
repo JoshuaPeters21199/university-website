@@ -73,6 +73,7 @@ export default function CourseForm() {
     }
 
     const handleTaChange = (event) => {
+        console.log(event.target.value);
         setTa(event.target.value);
     }
 
@@ -125,11 +126,11 @@ export default function CourseForm() {
     }
 
     return (
-        <div>
+        <div className="shadow rounded-lg w-[400px] h-auto flex flex-col justify-between p-5 bg-white">
             <div>
-                <h1>Create Course</h1>
+                <h1 className="font-bold">Create Course</h1>
 
-                <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
+                <form className="flex flex-col gap-3 mt-3" onSubmit={handleSubmit}>
                     <input 
                         type="text" 
                         placeholder="Course ID"
@@ -172,7 +173,7 @@ export default function CourseForm() {
                             className="bg-zinc-100/40 py-2 px-6 border border-gray-200"
                             required
                         >
-                            <option>
+                            <option value="" disabled>
                                 Select a TA
                             </option>
                             {tas.map((ta, index) => (

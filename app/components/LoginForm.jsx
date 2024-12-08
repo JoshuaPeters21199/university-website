@@ -41,21 +41,34 @@ export default function LoginForm() {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-            <input type="text" placeholder="Username" onChange={event => setUsername(event.target.value)} />
-            <input type="password" placeholder="Password" onChange={event => setPassword(event.target.value)} />
+        <div className="shadow rounded-lg w-[400px] h-auto flex flex-col justify-between p-5 bg-white">
+            <div className="flex items-center justify-evenly">
+                <img 
+                    src="/uvu-logo.png"
+                    className="w-36 h-auto"
+                ></img>
+                <img
+                    src="/uofu-logo.jpg"
+                    className="w-36 h-auto"
+                ></img>
+            </div>
 
-            <button className="bg-black text-white font-bold cursor-pointer px-6 py-2">Login</button>
+            <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+                <input type="text" placeholder="Username" onChange={event => setUsername(event.target.value)} />
+                <input type="password" placeholder="Password" onChange={event => setPassword(event.target.value)} />
 
-            {error && (
-                <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
-                    {error}
-                </div>
-            )}
+                <button className="bg-black text-white font-bold cursor-pointer px-6 py-2">Login</button>
 
-            <Link href={'/register'}>
-                Don't have an account? <span className="underline">Register</span>
-            </Link>
-        </form>
+                {error && (
+                    <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
+                        {error}
+                    </div>
+                )}
+
+                <Link href={'/register'} className="text-sm">
+                    Don't have an account? <span className="underline">Register</span>
+                </Link>
+            </form>
+        </div>
     )
 }

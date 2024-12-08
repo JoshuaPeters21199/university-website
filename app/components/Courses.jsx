@@ -1,7 +1,7 @@
 'use client'
 
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import CourseCard from "./CourseCard";
 
@@ -46,12 +46,13 @@ export default function Courses() {
     }, [session]);
 
     return (
-        <div>
+        <div className="px-10">
             {courseViewer === 'admin' && (
-                <ul>
+                <ul className="flex flex-col gap-10">
                     {courses.map((course, index) => (
                         <li key={index}>
                             <CourseCard 
+                                courseId={course.id}
                                 courseName={course.display} 
                                 courseTeacher={course.teacher}
                                 courseTA={course.ta}
@@ -66,6 +67,21 @@ export default function Courses() {
                     {courses.map((course, index) => (
                         <li key={index}>
                             <CourseCard
+                                courseId={course.id}
+                                courseName={course.display}
+                                courseTA={course.ta}
+                            />
+                        </li>
+                    ))}
+                </ul>
+            )}
+
+            {courseViewer === 'ta' && (
+                <ul>
+                    {courses.map((course, index) => (
+                        <li key={index}>
+                            <CourseCard
+                                courseId={course.id}
                                 courseName={course.display}
                                 courseTA={course.ta}
                             />

@@ -9,10 +9,6 @@ const handleSessionRedirect = (session) => {
 
   const userMap = {
     admin: { 'uvu': '/uvu/admin', 'uofu': '/uofu/admin' },
-    // admin: {
-    //   'uvu': (path) => path.startsWith('/uvu/admin') ? '/uvu/admin': '/unauthorized',
-    //   'uofu': (path) => path.startsWith('/uofu/admin') ? '/uofu/admin': '/unauthorized',
-    // },
     teacher: { 'uvu': '/uvu/teacher', 'uofu': '/uofu/teacher' },
     ta: { 'uvu': '/uvu/ta', 'uofu': '/uofu/ta' },
     student: { 'uvu': '/uvu/student', 'uofu': '/uofu/student' }
@@ -30,7 +26,7 @@ export default async function Home() {
   }
 
   return (
-    <main>
+    <main className="h-screen flex flex-col items-center justify-center bg-slate-100">
       <LoginForm />
     </main>
   );
