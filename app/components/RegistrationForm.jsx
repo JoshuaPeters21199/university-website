@@ -26,9 +26,9 @@ export default function RegistrationForm() {
         if (creatorRole === 'admin') {
             setRoles(['teacher', 'ta', 'student']);
         } else if (creatorRole === 'teacher') {
-            setRoles(['ta', 'student']);
+            setRole('ta');
         } else {
-            setRoles(['student']);
+            setRole('student');
         }
     }, [creatorRole]);
 
@@ -130,7 +130,7 @@ export default function RegistrationForm() {
                         onChange={event => setLastName(event.target.value)}
                     />
 
-                    {creatorRole !== 'student' && (
+                    {creatorRole !== 'student' || creatorRole !== 'teacher' && (
                         <div className="flex flex-col">
                             <label htmlFor="role-dropdown">Choose a role:</label>
                             <select

@@ -1,6 +1,5 @@
 'use client'
 
-import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
@@ -62,6 +61,12 @@ export default function CourseForm() {
 
         fetchTas();
     }, []);
+
+    useEffect(() => {
+        if (creatorRole === 'teacher') {
+            setTeacher(`${session?.user?.firstName} ${session?.user?.lastName}`);
+        }
+    }, [creatorRole]);
 
     const handleTeacherChange = (event) => {
         setTeacher(event.target.value);
