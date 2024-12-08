@@ -14,8 +14,9 @@ export default async function UVUTeacherPage() {
         <div>
             <div>Welcome to the UVU Teacher Dashboard</div>
             <Navbar />
-            <div>
+            <div className="flex gap-3">
                 <Link href={'/uvu/teacher/createTa'}>Create TA</Link>
+                <Link href={'/uvu/teacher/courses'}>Courses</Link>
             </div>
         </div>
     )
