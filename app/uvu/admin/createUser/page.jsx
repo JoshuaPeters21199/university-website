@@ -6,7 +6,7 @@ export default function UVUAdminCreateUser() {
         <div className="h-screen flex flex-col">
             <UVUAdminNavbar />
 
-            <div className="flex flex-grow items-center justify-center bg-slate-100">
+            <div className="flex flex-grow items-center justify-center bg-slate-200">
                 <RegistrationForm />
             </div>
         </div>

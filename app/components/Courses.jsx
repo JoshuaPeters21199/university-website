@@ -6,7 +6,7 @@ import CourseCard from "./CourseCard";
 
 export default function Courses() {
     const { data: session } = useSession();
-    const [courses, setCourses] = useState([]);
+    const [retrievedCourses, setRetrievedCourses] = useState([]);
     const courseViewer = session?.user?.role;
 
     // Retreive courses from database
@@ -18,12 +18,24 @@ export default function Courses() {
                 const role = session?.user?.role;
                 const user = `${session?.user?.firstName} ${session?.user?.lastName}`;
                 const school = session?.user?.school;
+
+                const body = {
+                    role,
+                    school,
+                    user,
+                };
+
+                // Only add courses if the user is a student
+                if (role === 'student') {
+                    body.courses = session?.user?.courses;
+                }
+
                 const response = await fetch('/api/getCourses', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ role, school, user })
+                    body: JSON.stringify(body),
                 });
 
                 if (!response.ok) {
@@ -32,7 +44,7 @@ export default function Courses() {
                 
                 const data = await response.json();
 
-                setCourses(data.data);
+                setRetrievedCourses(data.data);
             } catch (err) {
                 throw new Error(err.message);
             }
@@ -43,9 +55,21 @@ export default function Courses() {
 
     return (
         <div className="px-96">
-            {courseViewer === 'admin' && (
+            <ul className="flex flex-col gap-10">
+                {retrievedCourses.map((course, index) => (
+                    <li key={index}>
+                        <CourseCard
+                            courseId={course.id}
+                            courseName={course.display} 
+                            courseTeacher={course.teacher}
+                            courseTA={course.ta}
+                        />
+                    </li>
+                ))}
+            </ul>
+            {/* {courseViewer === 'admin' && (
                 <ul className="flex flex-col gap-10">
-                    {courses.map((course, index) => (
+                    {retrievedCourses.map((course, index) => (
                         <li key={index}>
                             <CourseCard 
                                 courseId={course.id}
@@ -59,8 +83,8 @@ export default function Courses() {
             )}
 
             {courseViewer === 'teacher' && (
-                <ul>
-                    {courses.map((course, index) => (
+                <ul className="flex flex-col gap-10">
+                    {retrievedCourses.map((course, index) => (
                         <li key={index}>
                             <CourseCard
                                 courseId={course.id}
@@ -73,18 +97,34 @@ export default function Courses() {
             )}
 
             {courseViewer === 'ta' && (
-                <ul>
-                    {courses.map((course, index) => (
+                <ul className="flex flex-col gap-10">
+                    {retrievedCourses.map((course, index) => (
                         <li key={index}>
                             <CourseCard
                                 courseId={course.id}
                                 courseName={course.display}
+                                courseTeacher={course.teacher}
                                 courseTA={course.ta}
                             />
                         </li>
                     ))}
                 </ul>
             )}
+
+            {courseViewer === 'student' && (
+                <ul className="flex flex-col gap-10">
+                    {retrievedCourses.map((course, index) => (
+                        <li key={index}>
+                            <CourseCard
+                                courseId={course.id}
+                                courseName={course.display} 
+                                courseTeacher={course.teacher}
+                                courseTA={course.ta}
+                            />
+                        </li>
+                    ))}
+                </ul>
+            )} */}
         </div>
     )
 }

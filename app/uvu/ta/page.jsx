@@ -1,7 +1,6 @@
-import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import Navbar from "@/app/components/Navbar";
+import UVUTaNavbar from "@/app/components/navbars/UVUTaNavbar";
 import Courses from "@/app/components/Courses";
 
 export default async function UVUTaPage() {
@@ -12,13 +11,12 @@ export default async function UVUTaPage() {
     }
 
     return (
-        <div>
-            <div>Welcome to the UVU TA Dashboard</div>
-            <Navbar />
-            <div>
-                <Link href={'/uvu/ta/createStudent'}>Create Student</Link>
+        <div className="h-screen flex flex-col">
+            <UVUTaNavbar />
+
+            <div className="bg-slate-200 flex-grow py-10">
+                <Courses />
             </div>
-            <Courses />
         </div>
     )
 }

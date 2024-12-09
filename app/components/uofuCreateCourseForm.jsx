@@ -17,6 +17,14 @@ export default function UofUCreateCourseForm() {
     const [teachers, setTeachers] = useState([]);
     const [tas, setTas] = useState([]);
 
+    // Automatically set courseTeacher if the user is a teacher
+    useEffect(() => {
+        if (session?.user?.role === 'teacher') {
+            const teacherName = `${session.user.firstName} ${session.user.lastName}`;
+            setCourseTeacher(teacherName);
+        }
+    }, [session]);
+
     // Retrieve teachers from database
     useEffect(() => {
         const fetchTeachers = async () => {
@@ -113,11 +121,11 @@ export default function UofUCreateCourseForm() {
     }
 
     return (
-        <div className="shadow rounded-lg w-[400px] h-auto flex flex-col justify-between p-5 bg-white">
+        <div className="shadow rounded-lg w-[600px] h-auto flex flex-col justify-between p-5 bg-white">
             <div>
                 <h1 className="font-bold">Create Course</h1>
 
-                <form className="flex flex-col gap-3 mt-3" onSubmit={handleSubmit}>
+                <form className="flex flex-col gap-5 mt-3" onSubmit={handleSubmit}>
 
                     {/* Course ID */}
                     <input 

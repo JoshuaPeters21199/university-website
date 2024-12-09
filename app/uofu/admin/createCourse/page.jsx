@@ -6,7 +6,7 @@ export default function UofUAdminCreateCourse() {
         <div className="h-screen flex flex-col">
             <UofUAdminNavbar />
 
-            <div className="flex flex-grow items-center justify-center bg-slate-100">
+            <div className="flex flex-grow items-center justify-center bg-slate-200">
                 <UofUCreateCourseForm />
             </div>
         </div>

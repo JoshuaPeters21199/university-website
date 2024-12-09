@@ -1,13 +1,14 @@
-import Link from "next/link";
 import RegistrationForm from "@/app/components/RegistrationForm";
+import UVUTeacherNavbar from "@/app/components/navbars/UVUTeacherNavbar";
 
 export default function UVUTeacherCreateTA() {
     return (
-        <div>
-            <div>
-                <Link href={'/uvu/teacher'}>Go Back</Link>
+        <div className="h-screen flex flex-col">
+            <UVUTeacherNavbar />
+
+            <div className="flex flex-grow items-center justify-center bg-slate-200">
+                <RegistrationForm />
             </div>
-            <RegistrationForm />
         </div>
     )
 }

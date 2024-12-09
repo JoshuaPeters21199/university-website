@@ -1,6 +1,7 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import Navbar from "@/app/components/Navbar";
+import UofUTeacherNavbar from "@/app/components/navbars/UofUTeacherNavbar";
+import Courses from "@/app/components/Courses";
 
 export default async function UOFUTeacherPage() {
     const session = await getServerSession(authOptions);
@@ -10,9 +11,12 @@ export default async function UOFUTeacherPage() {
     }
 
     return (
-        <div>
-            <div>Welcome to the U of U Teacher Dashboard</div>
-            <Navbar />
+        <div className="h-screen flex flex-col">
+            <UofUTeacherNavbar />
+
+            <div className="bg-slate-200 flex-grow py-10">
+                <Courses />
+            </div>
         </div>
     )
 }

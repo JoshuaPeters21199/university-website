@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import Navbar from "@/app/components/Navbar";
+import UVUTeacherNavbar from "@/app/components/navbars/UVUTeacherNavbar";
+import Courses from "@/app/components/Courses";
 
 export default async function UVUTeacherPage() {
     const session = await getServerSession(authOptions);
@@ -11,12 +11,11 @@ export default async function UVUTeacherPage() {
     }
 
     return (
-        <div>
-            <div>Welcome to the UVU Teacher Dashboard</div>
-            <Navbar />
-            <div className="flex gap-3">
-                <Link href={'/uvu/teacher/createTa'}>Create TA</Link>
-                <Link href={'/uvu/teacher/courses'}>Courses</Link>
+        <div className="h-screen flex flex-col">
+            <UVUTeacherNavbar />
+
+            <div className="bg-slate-200 flex-grow py-10">
+                <Courses />
             </div>
         </div>
     )
