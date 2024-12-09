@@ -1,5 +1,4 @@
 import Link from "next/link";
-import CourseForm from "@/app/components/CourseForm";
 
 export default function UVUTeacherCreateCourse() {
     return (
@@ -8,7 +7,6 @@ export default function UVUTeacherCreateCourse() {
             <div>
                 <Link href={'/uvu/teacher/courses'}>Go Back</Link>
             </div>
-            <CourseForm />
         </div>
     )
 }

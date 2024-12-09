@@ -1,5 +1,4 @@
 import RegistrationForm from "@/app/components/RegistrationForm";
-import Link from "next/link";
 import UVUAdminNavbar from "@/app/components/navbars/UVUAdminNavbar";
 
 export default function UVUAdminCreateUser() {

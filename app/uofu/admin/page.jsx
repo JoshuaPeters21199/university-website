@@ -1,9 +1,9 @@
-import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import Navbar from "@/app/components/Navbar";
+import Courses from "@/app/components/Courses";
+import UofUAdminNavbar from "@/app/components/navbars/UofUAdminNavbar";
 
-export default async function UofUAdminPage() {
+export default async function UVUAdminPage() {
     const session = await getServerSession(authOptions);
 
     if (!session || session.user.role !== 'admin' || session.user.school !== 'uofu') {
@@ -11,10 +11,12 @@ export default async function UofUAdminPage() {
     }
 
     return (
-        <div>
-            <div>Welcome to the U of U Admin Dashboard</div>
-            <Navbar />
-            <Link href={'/uofu/admin/createUser'}>Create User</Link>
+        <div className="h-screen flex flex-col">
+            <UofUAdminNavbar />
+
+            <div className="bg-slate-200 flex-grow py-10">
+                <Courses />
+            </div>
         </div>
     )
 }

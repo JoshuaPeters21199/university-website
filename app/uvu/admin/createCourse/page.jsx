@@ -1,6 +1,5 @@
-import Link from "next/link";
-import CourseForm from "@/app/components/CourseForm";
 import UVUAdminNavbar from "@/app/components/navbars/UVUAdminNavbar";
+import UVUCreateCourseForm from "@/app/components/uvuCreateCourseForm";
 
 export default function UVUAdminCreateCourse() {
     return (
@@ -8,7 +7,7 @@ export default function UVUAdminCreateCourse() {
             <UVUAdminNavbar />
 
             <div className="flex flex-grow items-center justify-center bg-slate-100">
-                <CourseForm />
+                <UVUCreateCourseForm />
             </div>
         </div>
     )
