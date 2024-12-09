@@ -7,20 +7,34 @@ export async function POST(req) {
         await connectDB();
 
         const body = await req.json();
-        const { role, school, user } = body;
+        const { role, school, user, courses } = body;
 
-        let courses;
+        let coursesData;
         if (role === 'admin') {
-            courses = await Course.find({ school: school });
+            coursesData = await Course.find({ school: school });
         } else if (role === 'teacher') {
-            courses = await Course.find({ school: school, teacher: user });
+            coursesData = await Course.find({ school: school, teacher: user });
         } else if (role === 'ta') {
-            courses = await Course.find({ school: school, ta: user });
-        } else {
+            coursesData = await Course.find({ school: school, ta: user });
+        } else if (role === 'student') {
+            // Check if courses parameter is provided
+            if (!courses || !Array.isArray(courses)) {
+                return NextResponse.json({ 
+                    success: false, 
+                    error: 'Courses array is required for students' 
+                }, { status: 400 });
+            }
+            // Query courses based on the student's courses array
+            coursesData = await Course.find({
+                school: school,
+                id: { $in: courses },
+            });
+        } 
+        else {
             return NextResponse.json({ success: false, error: 'Unauthorized role' }, { status: 403 });
         }
 
-        return NextResponse.json({ success: true, data: courses }, { status: 200 });
+        return NextResponse.json({ success: true, data: coursesData }, { status: 200 });
     } catch (error) {
         return NextResponse.json({ success: false, error: error.message }, { status: 500 });
     }

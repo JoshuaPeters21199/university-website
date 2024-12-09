@@ -28,8 +28,10 @@ export const authOptions = {
                         // name: `${user.firstName} ${user.lastName}`,
                         firstName: user.firstName,
                         lastName: user.lastName,
+                        username: user.username,
                         role: user.role,
                         school: user.school,
+                        courses: user.courses,
                     }
                 } catch (error) {
                     console.log('An error occurred: ', error)
@@ -43,6 +45,8 @@ export const authOptions = {
             session.user.school = token.school;
             session.user.firstName = token.firstName;
             session.user.lastName = token.lastName;
+            session.user.username = token.username;
+            session.user.courses = token.courses;
             return session;
         },
         async jwt({ token, user }) {
@@ -51,6 +55,8 @@ export const authOptions = {
                 token.school = user.school;
                 token.firstName = user.firstName;
                 token.lastName = user.lastName;
+                token.username = user.username;
+                token.courses = user.courses;
             }
             return token;
         }
