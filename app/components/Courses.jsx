@@ -1,14 +1,12 @@
 'use client'
 
 import { useSession } from "next-auth/react";
-// import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import CourseCard from "./CourseCard";
 
 export default function Courses() {
     const { data: session } = useSession();
     const [courses, setCourses] = useState([]);
-    const [error, setError] = useState('');
     const courseViewer = session?.user?.role;
 
     // Retreive courses from database
@@ -18,16 +16,14 @@ export default function Courses() {
 
             try {
                 const role = session?.user?.role;
-                const teacherUsername = `${session?.user?.firstName} ${session?.user?.lastName}`;
-                const response = await fetch('/api/uvuCourses', {
+                const user = `${session?.user?.firstName} ${session?.user?.lastName}`;
+                const school = session?.user?.school;
+                const response = await fetch('/api/getCourses', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({
-                        role,
-                        teacherUsername
-                    })
+                    body: JSON.stringify({ role, school, user })
                 });
 
                 if (!response.ok) {
@@ -38,7 +34,7 @@ export default function Courses() {
 
                 setCourses(data.data);
             } catch (err) {
-                setError(err.message);
+                throw new Error(err.message);
             }
         };
 
@@ -46,7 +42,7 @@ export default function Courses() {
     }, [session]);
 
     return (
-        <div className="px-10">
+        <div className="px-96">
             {courseViewer === 'admin' && (
                 <ul className="flex flex-col gap-10">
                     {courses.map((course, index) => (
