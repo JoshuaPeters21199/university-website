@@ -59,7 +59,7 @@ export default function CreateLogForm() {
     };
 
     return (
-        <div className="shadow rounded-lg w-[400px] h-auto flex flex-col justify-between p-5 bg-white">
+        <div className="shadow rounded-lg w-[600px] h-auto flex flex-col justify-between p-5 bg-white">
             <div>
                 <h1 className="font-bold">Create Log</h1>
 

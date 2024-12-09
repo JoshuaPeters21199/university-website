@@ -34,7 +34,7 @@ export default function RegistrationForm() {
             setTitle(`Create ${schoolNameDisplay} TA`);
         } else {
             setRole('student');
-            setTitle('Register As a Student')
+            setTitle('Register Student')
         }
     }, [creatorRole]);
 
@@ -106,7 +106,7 @@ export default function RegistrationForm() {
     };
 
     return (
-        <div className="shadow rounded-lg w-[400px] h-auto flex flex-col justify-between p-5 bg-white">
+        <div className="shadow rounded-lg w-[600px] h-auto flex flex-col justify-between p-5 bg-white">
             <div>
                 <h1 className="font-bold">{title}</h1>
 

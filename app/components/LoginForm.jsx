@@ -41,7 +41,7 @@ export default function LoginForm() {
     };
 
     return (
-        <div className="shadow rounded-lg w-[400px] h-auto flex flex-col justify-between p-5 bg-white">
+        <div className="shadow rounded-lg w-[600px] h-auto flex flex-col justify-between p-5 bg-white">
             <div className="flex items-center justify-evenly">
                 <img 
                     src="/uvu-logo.png"
